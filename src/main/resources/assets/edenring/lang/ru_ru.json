@@ -136,6 +136,8 @@
 	"block.edenring.volvox_block_dense": "Плотный блок вольвокса",
 	"entity.edenring.diskwing": "Дискокрыл",
 	"item.edenring.spawn_egg_diskwing": "Яйцо призыва дискокрыла",
+	"entity.edenring.lil_worm": "Маленький червь",
+	"item.edenring.spawn_egg_lil_worm": "Яйцо призыва маленького червя",
 	
 	"biome.edenring.empty_cave": "Пустая пещера",
 	"biome.edenring.eroded_cave": "Эродированная пещера",

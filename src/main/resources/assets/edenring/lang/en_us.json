@@ -152,6 +152,8 @@
 	"block.edenring.volvox_block_dense": "Dense Volvox Block",
 	"entity.edenring.diskwing": "Diskwing",
 	"item.edenring.spawn_egg_diskwing": "Diskwing Spawn Egg",
+	"entity.edenring.lil_worm": "Lil Worm",
+	"item.edenring.spawn_egg_lil_worm": "Lil Worm Spawn Egg",
 	
 	"biome.edenring.empty_cave": "Empty Cave",
 	"biome.edenring.eroded_cave": "Eroded Cave",

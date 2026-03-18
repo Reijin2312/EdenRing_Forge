@@ -5,6 +5,7 @@ import org.betterx.bclib.api.v2.levelgen.biomes.BCLBiomeBuilder;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import paulevs.edenring.registries.EdenBiomes;
+import paulevs.edenring.registries.EdenEntities;
 import paulevs.edenring.registries.EdenFeatures;
 import paulevs.edenring.registries.EdenSounds;
 import paulevs.edenring.world.biomes.BiomesCommonMethods;
@@ -19,6 +20,7 @@ public class GoldenForestBiome extends EdenRingBiome.Config {
     protected void addCustomBuildData(BCLBiomeBuilder builder) {
         BiomesCommonMethods.addDefaultLandFeatures(builder);
         builder
+                .spawn(EdenEntities.LIL_WORM, 30, 2, 5)
                 .fogDensity(1F)
                 .plantsColor(255, 174, 100)
                 .skyColor(113, 178, 255)

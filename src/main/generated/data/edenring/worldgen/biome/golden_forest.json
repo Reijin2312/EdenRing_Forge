@@ -60,7 +60,14 @@
   "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
-    "ambient": [],
+    "ambient": [
+      {
+        "type": "edenring:lil_worm",
+        "maxCount": 5,
+        "minCount": 2,
+        "weight": 30
+      }
+    ],
     "axolotls": [],
     "creature": [],
     "misc": [],
