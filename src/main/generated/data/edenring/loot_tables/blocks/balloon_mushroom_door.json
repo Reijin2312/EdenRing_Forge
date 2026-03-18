@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "edenring:balloon_mushroom_door",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "half": "lower"
+              }
+            }
+          ],
+          "name": "edenring:balloon_mushroom_door"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "edenring:blocks/balloon_mushroom_door"
+}

@@ -1,0 +1,190 @@
+plugins {
+    id 'java-library'
+    id 'idea'
+    id 'eclipse'
+    id 'net.minecraftforge.gradle' version "${forgegradle_version}"
+    id 'org.spongepowered.mixin' version "0.7.+"
+    id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
+
+def local_bclib = findProject(':BCLib') != null
+def local_wunderlib = findProject(':WunderLib') != null
+
+repositories {
+    maven { url "https://maven.minecraftforge.net" }
+    maven { url "https://maven.dblsaiko.net/" }
+    maven { url "https://maven.shedaniel.me/" }
+    maven { url "https://maven.blamejared.com" }
+    maven { url "https://jitpack.io" }
+    maven { url "https://maven.bai.lol" }
+    maven { url "https://api.modrinth.com/maven" }
+    mavenLocal()
+    flatDir { dirs "libs" }
+}
+
+minecraft {
+    mappings channel: "official", version: project.minecraft_version
+    runs {
+        client {
+            workingDirectory project.file("run")
+            property "forge.logging.markers", "REGISTRIES"
+            property "forge.logging.console.level", "info"
+        }
+        server {
+            workingDirectory project.file("run")
+            property "forge.logging.markers", "REGISTRIES"
+            property "forge.logging.console.level", "info"
+        }
+        data {
+            workingDirectory project.file("run")
+            args "--mod", project.mod_id,
+                    "--all",
+                    "--output", file("src/main/generated").toString(),
+                    "--existing", file("src/main/resources").toString()
+        }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+tasks.withType(JavaExec).configureEach {
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+mixin {
+    add sourceSets.main, "${project.mod_id}.refmap.json"
+    config "edenring.mixins.common.json"
+    config "edenring.mixins.client.json"
+}
+
+def mixinRefmapFile = layout.buildDirectory.file("tmp/compileJava/${project.mod_id}.refmap.json")
+tasks.register("syncMixinRefmap", Copy) {
+    dependsOn(tasks.named("compileJava"))
+    from(mixinRefmapFile)
+    into(layout.buildDirectory.dir("resources/main"))
+}
+
+tasks.matching { it.name == "prepareRuns" || it.name.startsWith("prepareRun") }.configureEach {
+    dependsOn(tasks.named("syncMixinRefmap"))
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+
+    compileOnly "com.google.code.findbugs:jsr305:3.0.2"
+    compileOnly "mezz.jei:jei-1.20.1-common-api:${project.jei_version}"
+    compileOnly "mezz.jei:jei-1.20.1-forge-api:${project.jei_version}"
+    runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:${project.jei_version}")
+
+    compileOnly "maven.modrinth:jade:${project.jade_version}"
+    compileOnly "maven.modrinth:kiwi:${project.kiwi_version}"
+    runtimeOnly fg.deobf("maven.modrinth:jade:${project.jade_version}")
+    runtimeOnly fg.deobf("maven.modrinth:kiwi:${project.kiwi_version}")
+
+    println "Using local BCLib: ${local_bclib}"
+    if (local_bclib) {
+        implementation project(path: ":BCLib", configuration: "dev")
+    } else {
+        implementation fg.deobf("org.betterx:bclib:${project.bclib_version}")
+    }
+
+    println "Using local WunderLib: ${local_wunderlib}"
+    if (local_wunderlib) {
+        implementation project(path: ":WunderLib", configuration: "dev")
+    } else {
+        implementation fg.deobf("de.ambertation:wunderlib:${project.wunderlib_version}")
+    }
+}
+
+processResources {
+    // Prevent stale files in build/resources from previous runs from leaking into jars.
+    doFirst {
+        delete(destinationDir)
+    }
+    // Datagen contributes only datapack content; runtime assets must come from src/main/resources.
+    from("src/main/generated") {
+        include "data/**"
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    inputs.property "version", project.mod_version
+    inputs.property "mod_id", project.mod_id
+    inputs.property "mod_name", project.mod_name
+    inputs.property "minecraft_version", project.minecraft_version
+    inputs.property "forge_version", project.forge_version
+    inputs.property "bclib_version", project.bclib_version
+    inputs.property "wunderlib_version", project.wunderlib_version
+
+    filesMatching("META-INF/mods.toml") {
+        expand(
+                "mod_id": project.mod_id,
+                "mod_name": project.mod_name,
+                "version": project.mod_version,
+                "minecraft_version": project.minecraft_version,
+                "forge_version": project.forge_version,
+                "bclib_version": project.bclib_version,
+                "wunderlib_version": project.wunderlib_version
+        )
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+    options.release = 17
+}
+
+javadoc {
+    options.tags = ["reason"]
+    options.stylesheetFile = new File(projectDir, "javadoc.css")
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier = "javadoc"
+    from javadoc.destinationDir
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    archiveClassifier = "sources"
+    from sourceSets.main.allSource
+}
+
+java {
+    withSourcesJar()
+}
+
+jar {
+    manifest {
+        attributes(
+                "MixinConfigs": String.join(",",
+                        "edenring.mixins.common.json",
+                        "edenring.mixins.client.json"
+                )
+        )
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from "LICENSE"
+}
+
+configurations {
+    dev {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+artifacts {
+    dev jar
+}

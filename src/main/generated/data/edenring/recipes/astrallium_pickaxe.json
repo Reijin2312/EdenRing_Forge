@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "astrallium_tools",
+  "key": {
+    "A": {
+      "item": "edenring:astrallium"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "AAA",
+    " S ",
+    " S "
+  ],
+  "result": {
+    "item": "edenring:astrallium_pickaxe"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "astrallium_armor",
+  "key": {
+    "A": {
+      "item": "edenring:astrallium"
+    }
+  },
+  "pattern": [
+    "A A",
+    "AAA",
+    "AAA"
+  ],
+  "result": {
+    "item": "edenring:astrallium_chestplate"
+  },
+  "show_notification": true
+}

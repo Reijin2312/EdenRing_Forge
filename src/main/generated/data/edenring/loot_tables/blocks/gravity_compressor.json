@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "edenring:gravity_compressor"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "edenring:blocks/gravity_compressor"
+}

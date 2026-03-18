@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "astrallium_tools",
+  "key": {
+    "A": {
+      "item": "edenring:astrallium"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "AA",
+    " S",
+    " S"
+  ],
+  "result": {
+    "item": "edenring:astrallium_hoe"
+  },
+  "show_notification": true
+}
