@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": [
+      { "model": "edenring:block/eden_mycelium" },
+      { "model": "edenring:block/eden_mycelium", "y": 90 },
+      { "model": "edenring:block/eden_mycelium", "y": 180 },
+      { "model": "edenring:block/eden_mycelium", "y": 270 }
+    ]
+  }
+}

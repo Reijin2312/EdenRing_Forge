@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/grass_block",
+  "textures": {
+    "top": "minecraft:block/grass_block_top",
+    "side": "edenring:block/grass_side",
+    "overlay": "edenring:block/grass_side_overlay"
+  }
+}

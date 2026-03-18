@@ -1,0 +1,7 @@
+{
+  "parent": "bclib:block/bar_stool",
+  "textures": {
+    "texture": "edenring:block/balloon_mushroom_planks",
+    "cloth": "block/black_wool"
+  }
+}

@@ -1,0 +1,9 @@
+﻿{
+    "multipart":  [
+                      {
+                          "apply":  {
+                                        "model":  "edenring:block/portal_center"
+                                    }
+                      }
+                  ]
+}

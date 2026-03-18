@@ -1,0 +1,9 @@
+﻿{
+    "multipart":  [
+                      {
+                          "apply":  {
+                                        "model":  "edenring:block/tall_gold_grass"
+                                    }
+                      }
+                  ]
+}

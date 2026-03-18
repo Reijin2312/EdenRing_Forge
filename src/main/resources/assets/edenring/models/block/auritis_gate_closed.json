@@ -1,0 +1,6 @@
+﻿{
+    "parent":  "minecraft:block/fence_gate",
+    "textures":  {
+                     "texture":  "edenring:block/auritis_planks"
+                 }
+}

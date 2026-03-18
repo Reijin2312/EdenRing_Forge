@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "top=false": {
+      "model": "edenring:block/alaespes"
+    },
+    "top=true": {
+      "model": "edenring:block/alaespes_top"
+    }
+  }
+}

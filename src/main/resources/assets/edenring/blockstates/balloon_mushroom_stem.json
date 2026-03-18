@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "shape=up": {
+      "model": "edenring:block/balloon_mushroom_stem"
+    },
+    "shape=north_south": {
+      "model": "edenring:block/balloon_mushroom_stem",
+      "x": 90
+    },
+    "shape=east_west": {
+      "model": "edenring:block/balloon_mushroom_stem",
+      "x": 90,
+      "y": 90
+    },
+    "shape=thin": {
+      "model": "edenring:block/balloon_mushroom_stem_thin"
+    },
+    "shape=thin_top": {
+      "model": "edenring:block/balloon_mushroom_stem_top"
+    },
+    "shape=fur": {
+      "model": "edenring:block/balloon_mushroom_fur"
+    }
+  }
+}

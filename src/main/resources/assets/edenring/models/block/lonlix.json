@@ -1,0 +1,7 @@
+{
+    "parent":  "edenring:block/tinted_cross_overlay_base",
+    "textures":  {
+                     "texture":  "edenring:block/lonlix_color",
+                     "overlay":  "edenring:block/lonlix_overlay"
+                 }
+}

@@ -1,0 +1,50 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "edenring:block/eden_moss_side",
+    "side": "edenring:block/eden_moss_side",
+    "top": "edenring:block/eden_moss_top"
+  },
+  "elements": [
+    {
+      "from": [-0.1, 2, -0.1],
+      "to": [16.1, 2, 16.1],
+      "faces": {
+        "down": {"uv": [0, 0, 16, 16], "texture": "#top", "tintindex": 0},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#top", "tintindex": 0}
+      }
+    },
+    {
+      "from": [-0.1, -9, -0.1],
+      "to": [-0.1, 2, 16.1],
+      "faces": {
+        "west": {"uv": [0, 0, 16, 11], "texture": "#side", "tintindex": 0},
+        "east": {"uv": [0, 0, 16, 11], "texture": "#side", "tintindex": 0}
+      }
+    },
+    {
+      "from": [16.1, -9, -0.1],
+      "to": [16.1, 2, 16.1],
+      "faces": {
+        "west": {"uv": [0, 0, 16, 11], "texture": "#side", "tintindex": 0},
+        "east": {"uv": [0, 0, 16, 11], "texture": "#side", "tintindex": 0}
+      }
+    },
+    {
+      "from": [-0.1, -9, -0.1],
+      "to": [16.1, 2, -0.1],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 11], "texture": "#side", "tintindex": 0},
+        "south": {"uv": [0, 0, 16, 11], "texture": "#side", "tintindex": 0}
+      }
+    },
+    {
+      "from": [-0.1, -9, 16.1],
+      "to": [16.1, 2, 16.1],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 11], "texture": "#side", "tintindex": 0},
+        "south": {"uv": [0, 0, 16, 11], "texture": "#side", "tintindex": 0}
+      }
+    }
+  ]
+}

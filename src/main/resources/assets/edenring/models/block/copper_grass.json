@@ -1,0 +1,7 @@
+{
+    "parent":  "edenring:block/tinted_cross_overlay_base",
+    "textures":  {
+                     "texture":  "edenring:block/copper_grass_color",
+                     "overlay":  "edenring:block/copper_grass_overlay"
+                 }
+}

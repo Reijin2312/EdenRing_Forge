@@ -1,0 +1,6 @@
+{
+    "parent": "bclib:block/chair",
+    "textures": {
+      "texture": "edenring:block/balloon_mushroom_planks"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "variants":  {
+                     "powered=false":  {
+                                           "model":  "edenring:block/auritis_plate_up"
+                                       },
+                     "powered=true":  {
+                                          "model":  "edenring:block/auritis_plate_down"
+                                      }
+                 }
+}

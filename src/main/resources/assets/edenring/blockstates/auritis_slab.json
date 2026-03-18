@@ -1,0 +1,15 @@
+{
+    "variants":  {
+                     "type=bottom":  {
+                                         "model":  "edenring:block/auritis_slab_bottom"
+                                     },
+                     "type=top":  {
+                                      "model":  "edenring:block/auritis_slab_top",
+                                      "x":  180,
+                                      "uvlock":  true
+                                  },
+                     "type=double":  {
+                                         "model":  "edenring:block/auritis_slab_double"
+                                     }
+                 }
+}

@@ -1,0 +1,10 @@
+{
+    "parent":  "minecraft:block/composter",
+    "textures":  {
+                     "particle":  "edenring:block/brain_tree_composter_side",
+                     "top":  "edenring:block/brain_tree_composter_top",
+                     "bottom":  "edenring:block/brain_tree_composter_bottom",
+                     "side":  "edenring:block/brain_tree_composter_side",
+                     "inside":  "edenring:block/brain_tree_composter_bottom"
+                 }
+}

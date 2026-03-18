@@ -1,0 +1,10 @@
+{
+    "parent":  "minecraft:block/composter",
+    "textures":  {
+                     "particle":  "edenring:block/pulse_tree_composter_side",
+                     "top":  "edenring:block/pulse_tree_composter_top",
+                     "bottom":  "edenring:block/pulse_tree_composter_bottom",
+                     "side":  "edenring:block/pulse_tree_composter_side",
+                     "inside":  "edenring:block/pulse_tree_composter_bottom"
+                 }
+}

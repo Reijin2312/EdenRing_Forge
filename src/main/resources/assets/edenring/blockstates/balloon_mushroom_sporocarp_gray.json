@@ -1,0 +1,9 @@
+﻿{
+    "multipart":  [
+                      {
+                          "apply":  {
+                                        "model":  "edenring:block/balloon_mushroom_sporocarp_gray"
+                                    }
+                      }
+                  ]
+}

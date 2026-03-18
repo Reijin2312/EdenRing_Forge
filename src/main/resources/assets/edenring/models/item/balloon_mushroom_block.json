@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "edenring:block/balloon_mushroom_block",
+    "side": "edenring:block/balloon_mushroom_block",
+    "bottom": "edenring:block/balloon_mushroom_block_bottom"
+  }
+}

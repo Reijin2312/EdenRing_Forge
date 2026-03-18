@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": [
+      { "model": "edenring:block/eden_grass" },
+      { "model": "edenring:block/eden_grass", "y": 90 },
+      { "model": "edenring:block/eden_grass", "y": 180 },
+      { "model": "edenring:block/eden_grass", "y": 270 }
+    ]
+  }
+}

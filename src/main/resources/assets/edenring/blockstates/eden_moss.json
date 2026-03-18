@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": [
+      { "model": "edenring:block/eden_moss" },
+      { "model": "edenring:block/eden_moss", "y": 90 },
+      { "model": "edenring:block/eden_moss", "y": 180 },
+      { "model": "edenring:block/eden_moss", "y": 270 }
+    ]
+  }
+}

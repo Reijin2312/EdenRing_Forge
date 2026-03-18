@@ -1,0 +1,6 @@
+{
+    "parent":  "minecraft:block/fence_inventory",
+    "textures":  {
+                     "texture":  "edenring:block/pulse_tree_planks"
+                 }
+}
