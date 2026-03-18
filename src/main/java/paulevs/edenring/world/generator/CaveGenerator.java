@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunkSection;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import org.betterx.bclib.noise.OpenSimplexNoise;
 import org.betterx.bclib.util.BlocksHelper;
@@ -46,6 +47,8 @@ public class CaveGenerator {
 		InterpolationCell cellVoronoi = new InterpolationCell(p -> getTunelNoise(p, buffer27, random), 5, (maxY - minY) / 4 + 1, 4, 4, origin);
 		InterpolationCell cellBigCave = new InterpolationCell(p -> getBigCaveNoise(cellSparse, p), 3, maxCell, 8, 8, origin);
 		InterpolationCell cellPillars = new InterpolationCell(p -> getPillars(p, seed, buffer9, random), 5, (maxY - minY) / 4 + 1, 4, 4, origin);
+		Heightmap oceanFloor = chunkAccess.getOrCreateHeightmapUnprimed(Heightmap.Types.OCEAN_FLOOR_WG);
+		Heightmap worldSurface = chunkAccess.getOrCreateHeightmapUnprimed(Heightmap.Types.WORLD_SURFACE_WG);
 		
 		MutableBlockPos pos = new MutableBlockPos();
 		
@@ -118,6 +121,8 @@ public class CaveGenerator {
 						
 						if (noise > 0) {
 							section.setBlockState(x, y & 15, z, CAVE_AIR, false);
+							oceanFloor.update(x, y, z, CAVE_AIR);
+							worldSurface.update(x, y, z, CAVE_AIR);
 							int py = pos.getY();
 							pos.setY(py + 1);
 						}

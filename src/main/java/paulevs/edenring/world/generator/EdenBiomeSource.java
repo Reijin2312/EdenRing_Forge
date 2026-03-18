@@ -35,7 +35,16 @@ public class EdenBiomeSource extends BiomeSource {
 		).apply(instance, instance.stable(EdenBiomeSource::new))
 	);
 	
-	private Map<ChunkPos, InterpolationCell> terrainCache = new ConcurrentHashMap<>();
+	private static final int SAMPLE_DXZ = 8;
+	private static final int SAMPLE_DY = 8;
+	private static final int LAND_SCAN_STEP = 4;
+	private static final int EDEN_MIN_Y = 0;
+	private static final int EDEN_MAX_Y = 320;
+	private static final int SAMPLE_WIDTH = 3;
+	private static final int SAMPLE_HEIGHT = (EDEN_MAX_Y - EDEN_MIN_Y) / SAMPLE_DY + 1;
+	private static final int SMOOTH_WIDTH = 4;
+	private static final int SMOOTH_HEIGHT = SAMPLE_HEIGHT + 1;
+	private final Map<ChunkPos, TerrainCells> terrainCache = new ConcurrentHashMap<>();
 	private BiomePicker pickerLand;
 	private BiomePicker pickerVoid;
 	private BiomePicker pickerCave;
@@ -95,16 +104,11 @@ public class EdenBiomeSource extends BiomeSource {
 		int pz = (z << 2) | 2;
 		
 		ChunkPos chunkPos = new ChunkPos(px >> 4, pz >> 4);
-		InterpolationCell cell = terrainCache.get(chunkPos);
-		if (cell == null) {
-			TerrainGenerator generator = MultiThreadGenerator.getTerrainGenerator();
-			cell = new InterpolationCell(generator, 3, 33, 8, 8, new BlockPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ()));
-			terrainCache.put(chunkPos, cell);
-		}
+		TerrainCells cells = terrainCache.computeIfAbsent(chunkPos, this::createTerrainCells);
 		MutableBlockPos pos = new MutableBlockPos(px, 0, pz);
 		
-		if (isLand(cell, pos)) {
-			if (isCave(cell, pos.setY(py))) {
+		if (isLand(cells, pos)) {
+			if (isCave(cells, pos.setY(py))) {
 				return mapCave.getBiome(px, 0, pz).biome;
 			}
 			return mapLand.getBiome(px, 0, pz).biome;
@@ -127,21 +131,60 @@ public class EdenBiomeSource extends BiomeSource {
 		}
 	}
 	
-	private boolean isLand(InterpolationCell cell, MutableBlockPos pos) {
-		for (short py = 0; py < 256; py += 8) {
-			if (cell.get(pos.setY(py), false) > -0.05F) {
+	private boolean isLand(TerrainCells cells, MutableBlockPos pos) {
+		for (int py = EDEN_MIN_Y; py < EDEN_MAX_Y; py += LAND_SCAN_STEP) {
+			if (sampleTerrainDensity(cells, pos.setY(py)) > 0.0F) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	private boolean isCave(InterpolationCell cell, MutableBlockPos pos) {
+	private boolean isCave(TerrainCells cells, MutableBlockPos pos) {
 		if (pos.getY() < 8 || pos.getY() > 240) return false;
-		boolean v1 = cell.get(pos, false) > 0.0F;
-		boolean v2 = cell.get(pos.setY(pos.getY() + 12), false) > 0.0F;
-		boolean v3 = cell.get(pos.setY(pos.getY() - 16), false) > 0.0F;
+		int baseY = pos.getY();
+		boolean v1 = sampleTerrainDensity(cells, pos.setY(baseY)) > 0.0F;
+		boolean v2 = sampleTerrainDensity(cells, pos.setY(baseY + 12)) > 0.0F;
+		boolean v3 = sampleTerrainDensity(cells, pos.setY(baseY - 16)) > 0.0F;
 		return v1 && v2 && v3;
+	}
+
+	private TerrainCells createTerrainCells(ChunkPos chunkPos) {
+		TerrainGenerator generator = MultiThreadGenerator.getTerrainGenerator();
+		BlockPos origin = new BlockPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ());
+		InterpolationCell terrain = new InterpolationCell(
+				generator,
+				SAMPLE_WIDTH,
+				SAMPLE_HEIGHT,
+				SAMPLE_DXZ,
+				SAMPLE_DY,
+				origin
+		);
+		InterpolationCell smooth = new InterpolationCell(
+				generator,
+				SMOOTH_WIDTH,
+				SMOOTH_HEIGHT,
+				SAMPLE_DXZ,
+				SAMPLE_DY,
+				origin.offset(-4, -4, -4)
+		);
+		return new TerrainCells(terrain, smooth);
+	}
+
+	private float sampleTerrainDensity(TerrainCells cells, MutableBlockPos pos) {
+		float densityA = cells.terrain.get(pos, false);
+		float densityB = cells.smooth.get(pos, false);
+		return (densityA + densityB) * 0.5F;
+	}
+
+	private static class TerrainCells {
+		private final InterpolationCell terrain;
+		private final InterpolationCell smooth;
+
+		private TerrainCells(InterpolationCell terrain, InterpolationCell smooth) {
+			this.terrain = terrain;
+			this.smooth = smooth;
+		}
 	}
 
 	@Override

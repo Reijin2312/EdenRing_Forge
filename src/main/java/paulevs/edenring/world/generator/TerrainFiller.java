@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunkSection;
+import net.minecraft.world.level.levelgen.Heightmap;
 import org.betterx.bclib.util.MHelper;
 import paulevs.edenring.noise.InterpolationCell;
 
@@ -26,6 +27,8 @@ public class TerrainFiller {
 		
 		MutableBlockPos pos = new MutableBlockPos();
 		MutableBlockPos wpos = new MutableBlockPos();
+		Heightmap oceanFloor = chunkAccess.getOrCreateHeightmapUnprimed(Heightmap.Types.OCEAN_FLOOR_WG);
+		Heightmap worldSurface = chunkAccess.getOrCreateHeightmapUnprimed(Heightmap.Types.WORLD_SURFACE_WG);
 		
 		short newMinY = (short) MHelper.min(cellTerrain.getMinY(), cellTerrain2.getMinY());
 		short newMaxY = (short) MHelper.max(cellTerrain.getMaxY(), cellTerrain2.getMaxY());
@@ -48,6 +51,8 @@ public class TerrainFiller {
 					float d2 = cellTerrain2.get(wpos, false);
 					if ((d1 + d2) * 0.5F > 0) {
 						section.setBlockState(x, y & 15, z, STONE, false);
+						oceanFloor.update(x, y, z, STONE);
+						worldSurface.update(x, y, z, STONE);
 					}
 				}
 			}
