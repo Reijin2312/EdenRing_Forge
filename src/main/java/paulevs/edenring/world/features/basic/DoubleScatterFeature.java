@@ -28,6 +28,9 @@ public class DoubleScatterFeature extends ScatterFeature {
 	
 	@Override
 	protected void placeBlock(WorldGenLevel level, BlockPos pos, BlockState state) {
+		if (state.hasProperty(BaseDoublePlantBlock.ROTATION)) {
+			state = state.setValue(BaseDoublePlantBlock.ROTATION, level.getRandom().nextInt(4));
+		}
 		BlockPos above = pos.above();
 		if (level.getBlockState(above).isAir()) {
 			BlocksHelper.setWithoutUpdate(level, pos, state);

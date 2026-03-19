@@ -100,64 +100,76 @@ public class EdenRecipes {
 						.addMaterial('S', Items.STICK)
 						.build();
 
-		BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_sword"), EdenItems.ASTRALLIUM_SWORD)
-						.setGroup("astrallium_tools")
-						.setShape("A", "A", "S")
-						.addMaterial('A', EdenItems.ASTRALLIUM)
-						.addMaterial('S', Items.STICK)
-						.build();
-
-		BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_pickaxe"), EdenItems.ASTRALLIUM_PICKAXE)
-						.setGroup("astrallium_tools")
-						.setShape("AAA", " S ", " S ")
-						.addMaterial('A', EdenItems.ASTRALLIUM)
-						.addMaterial('S', Items.STICK)
-						.build();
-
-		BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_axe"), EdenItems.ASTRALLIUM_AXE)
-						.setGroup("astrallium_tools")
-						.setShape("AA", "AS", " S")
-						.addMaterial('A', EdenItems.ASTRALLIUM)
-						.addMaterial('S', Items.STICK)
-						.build();
-
-		BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_shovel"), EdenItems.ASTRALLIUM_SHOVEL)
-						.setGroup("astrallium_tools")
-						.setShape("A", "S", "S")
-						.addMaterial('A', EdenItems.ASTRALLIUM)
-						.addMaterial('S', Items.STICK)
-						.build();
-
-		BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_hoe"), EdenItems.ASTRALLIUM_HOE)
-						.setGroup("astrallium_tools")
-						.setShape("AA", " S", " S")
-						.addMaterial('A', EdenItems.ASTRALLIUM)
-						.addMaterial('S', Items.STICK)
-						.build();
-
-		BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_helmet"), EdenItems.ASTRALLIUM_HELMET)
-						.setGroup("astrallium_armor")
-						.setShape("AAA", "A A")
-						.addMaterial('A', EdenItems.ASTRALLIUM)
-						.build();
-
-		BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_chestplate"), EdenItems.ASTRALLIUM_CHESTPLATE)
-						.setGroup("astrallium_armor")
-						.setShape("A A", "AAA", "AAA")
-						.addMaterial('A', EdenItems.ASTRALLIUM)
-						.build();
-
-		BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_leggings"), EdenItems.ASTRALLIUM_LEGGINGS)
-						.setGroup("astrallium_armor")
-						.setShape("AAA", "A A", "A A")
-						.addMaterial('A', EdenItems.ASTRALLIUM)
-						.build();
-
-		BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_boots"), EdenItems.ASTRALLIUM_BOOTS)
-						.setGroup("astrallium_armor")
-						.setShape("A A", "A A")
-						.addMaterial('A', EdenItems.ASTRALLIUM)
-						.build();
+		if (
+				EdenItems.ASTRALLIUM_SWORD != null &&
+				EdenItems.ASTRALLIUM_PICKAXE != null &&
+				EdenItems.ASTRALLIUM_AXE != null &&
+				EdenItems.ASTRALLIUM_SHOVEL != null &&
+				EdenItems.ASTRALLIUM_HOE != null &&
+				EdenItems.ASTRALLIUM_HELMET != null &&
+				EdenItems.ASTRALLIUM_CHESTPLATE != null &&
+				EdenItems.ASTRALLIUM_LEGGINGS != null &&
+				EdenItems.ASTRALLIUM_BOOTS != null
+		) {
+			BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_sword"), EdenItems.ASTRALLIUM_SWORD)
+							.setGroup("astrallium_tools")
+							.setShape("A", "A", "S")
+							.addMaterial('A', EdenItems.ASTRALLIUM)
+							.addMaterial('S', Items.STICK)
+							.build();
+			
+			BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_pickaxe"), EdenItems.ASTRALLIUM_PICKAXE)
+							.setGroup("astrallium_tools")
+							.setShape("AAA", " S ", " S ")
+							.addMaterial('A', EdenItems.ASTRALLIUM)
+							.addMaterial('S', Items.STICK)
+							.build();
+			
+			BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_axe"), EdenItems.ASTRALLIUM_AXE)
+							.setGroup("astrallium_tools")
+							.setShape("AA", "AS", " S")
+							.addMaterial('A', EdenItems.ASTRALLIUM)
+							.addMaterial('S', Items.STICK)
+							.build();
+			
+			BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_shovel"), EdenItems.ASTRALLIUM_SHOVEL)
+							.setGroup("astrallium_tools")
+							.setShape("A", "S", "S")
+							.addMaterial('A', EdenItems.ASTRALLIUM)
+							.addMaterial('S', Items.STICK)
+							.build();
+			
+			BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_hoe"), EdenItems.ASTRALLIUM_HOE)
+							.setGroup("astrallium_tools")
+							.setShape("AA", " S", " S")
+							.addMaterial('A', EdenItems.ASTRALLIUM)
+							.addMaterial('S', Items.STICK)
+							.build();
+			
+			BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_helmet"), EdenItems.ASTRALLIUM_HELMET)
+							.setGroup("astrallium_armor")
+							.setShape("AAA", "A A")
+							.addMaterial('A', EdenItems.ASTRALLIUM)
+							.build();
+			
+			BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_chestplate"), EdenItems.ASTRALLIUM_CHESTPLATE)
+							.setGroup("astrallium_armor")
+							.setShape("A A", "AAA", "AAA")
+							.addMaterial('A', EdenItems.ASTRALLIUM)
+							.build();
+			
+			BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_leggings"), EdenItems.ASTRALLIUM_LEGGINGS)
+							.setGroup("astrallium_armor")
+							.setShape("AAA", "A A", "A A")
+							.addMaterial('A', EdenItems.ASTRALLIUM)
+							.build();
+			
+			BCLRecipeBuilder.crafting(EdenRing.makeID("astrallium_boots"), EdenItems.ASTRALLIUM_BOOTS)
+							.setGroup("astrallium_armor")
+							.setShape("A A", "A A")
+							.addMaterial('A', EdenItems.ASTRALLIUM)
+							.build();
+		}
 		
 		log = EdenBlocks.BRAIN_TREE_MATERIAL.getBlock(WoodenComplexMaterial.BLOCK_LOG);
 		Block log2 = EdenBlocks.BRAIN_TREE_MATERIAL.getBlock(WoodenComplexMaterial.BLOCK_STRIPPED_LOG);
@@ -201,6 +213,8 @@ public class EdenRecipes {
 						.setPrimaryInputAndUnlock(EdenBlocks.VOLVOX_BLOCK_DENSE).build();
 		BCLRecipeBuilder.smelting(EdenRing.makeID("limphium_leaf"), EdenItems.LIMPHIUM_LEAF_DRYED)
 						.setPrimaryInputAndUnlock(EdenItems.LIMPHIUM_LEAF).build();
+		BCLRecipeBuilder.smelting(EdenRing.makeID("astrallium_ingot"), EdenItems.ASTRALLIUM)
+						.setPrimaryInputAndUnlock(EdenItems.RAW_ASTRALLIUM).build();
 		
 		Block[] coloredBlocks = EdenBlocks.MYCOTIC_LANTERN_COLORED.values().toArray(new Block[16]);
 		EdenBlocks.MYCOTIC_LANTERN_COLORED.forEach(((color, block) -> {

@@ -71,6 +71,11 @@ public class EdenFeatures {
 		inlineBuild("ore_copper", new DepthScatterFeature(Blocks.COPPER_ORE, 16, 4, Blocks.STONE, Blocks.DEEPSLATE, Blocks.CALCITE, Blocks.TUFF)),
 		NoneFeatureConfiguration.NONE
 	);
+	public static final BCLFeature<DepthScatterFeature, NoneFeatureConfiguration> ORE_ASTRALLIUM = registerChunk(
+		"ore_astrallium",
+		inlineBuild("ore_astrallium", new DepthScatterFeature(EdenBlocks.ASTRALLIUM_ORE, 10, 3, Blocks.STONE, Blocks.DEEPSLATE, Blocks.CALCITE, Blocks.TUFF)),
+		NoneFeatureConfiguration.NONE
+	);
 	public static final BCLFeature<DepthScatterFeature, NoneFeatureConfiguration> ORE_GOLD = registerChunk(
 		"ore_gold",
 		inlineBuild("ore_gold", new DepthScatterFeature(Blocks.GOLD_ORE, 8, 2, Blocks.STONE, Blocks.DEEPSLATE, Blocks.CALCITE, Blocks.TUFF)),

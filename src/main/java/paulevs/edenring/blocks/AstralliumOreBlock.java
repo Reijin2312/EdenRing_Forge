@@ -45,6 +45,6 @@ public class AstralliumOreBlock extends Block {
         List<ItemStack> dropsOriginal = super.getDrops(state, builder);
         if (!dropsOriginal.isEmpty())
             return dropsOriginal;
-        return Collections.singletonList(new ItemStack(EdenItems.ASTRALLIUM));
+        return Collections.singletonList(new ItemStack(EdenItems.RAW_ASTRALLIUM));
     }
 }

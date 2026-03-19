@@ -33,8 +33,12 @@ public class EdenEntities {
 	private static final boolean LIL_WORM_ENABLED = ENTITY_CONFIG.getBooleanRoot(LIL_WORM_ID.getPath(), true);
 
 	// Living //
-	public static final EntityType<DiskwingEntity> DISKWING = build("diskwing", MobCategory.AMBIENT, 0.9F, 0.25F, DiskwingEntity::new, true);
-	public static final EntityType<LilWormEntity> LIL_WORM = build("lil_worm", MobCategory.AMBIENT, 0.5F, 0.2F, LilWormEntity::new, true);
+	public static final EntityType<DiskwingEntity> DISKWING = DISKWING_ENABLED
+			? build("diskwing", MobCategory.AMBIENT, 0.9F, 0.25F, DiskwingEntity::new, true)
+			: null;
+	public static final EntityType<LilWormEntity> LIL_WORM = LIL_WORM_ENABLED
+			? build("lil_worm", MobCategory.CREATURE, 0.5F, 0.2F, LilWormEntity::new, true)
+			: null;
 
 	// Technical //
 	public static final EntityType<LightningRayEntity> LIGHTNING_RAY = build("lightning_ray", MobCategory.MISC, 1.0F, 1.0F, LightningRayEntity::new, false);
@@ -58,10 +62,10 @@ public class EdenEntities {
 			return;
 		}
 		event.register(Registries.ENTITY_TYPE, helper -> {
-			if (DISKWING_ENABLED) {
+			if (DISKWING_ENABLED && DISKWING != null) {
 				helper.register(DISKWING_ID, DISKWING);
 			}
-			if (LIL_WORM_ENABLED) {
+			if (LIL_WORM_ENABLED && LIL_WORM != null) {
 				helper.register(LIL_WORM_ID, LIL_WORM);
 			}
 			helper.register(LIGHTNING_RAY_ID, LIGHTNING_RAY);
@@ -71,10 +75,10 @@ public class EdenEntities {
 	}
 
 	public static void onRegisterAttributes(EntityAttributeCreationEvent event) {
-		if (DISKWING_ENABLED) {
+		if (DISKWING_ENABLED && DISKWING != null) {
 			event.put(DISKWING, DiskwingEntity.createMobAttributes().build());
 		}
-		if (LIL_WORM_ENABLED) {
+		if (LIL_WORM_ENABLED && LIL_WORM != null) {
 			event.put(LIL_WORM, LilWormEntity.createMobAttributes().build());
 		}
 	}
@@ -84,10 +88,10 @@ public class EdenEntities {
 			return;
 		}
 		spawnEggsRegistered = true;
-		if (DISKWING_ENABLED) {
+		if (DISKWING_ENABLED && DISKWING != null) {
 			EdenItems.REGISTRY.registerEgg(EdenRing.makeID("spawn_egg_diskwing"), DISKWING, 0x5b3e52, 0x978090);
 		}
-		if (LIL_WORM_ENABLED) {
+		if (LIL_WORM_ENABLED && LIL_WORM != null) {
 			EdenItems.REGISTRY.registerEgg(EdenRing.makeID("spawn_egg_lil_worm"), LIL_WORM, 0xE2C98D, 0x78674F);
 		}
 	}
@@ -113,11 +117,11 @@ public class EdenEntities {
 		if (spawnRulesRegistered || (!DISKWING_ENABLED && !LIL_WORM_ENABLED)) {
 			return;
 		}
-		if (DISKWING_ENABLED) {
+		if (DISKWING_ENABLED && DISKWING != null) {
 			SpawnRuleBuilder.start(DISKWING).aboveGround(2).maxNearby(6, 48).buildNoRestrictions(Types.MOTION_BLOCKING);
 		}
-		if (LIL_WORM_ENABLED) {
-			SpawnRuleBuilder.start(LIL_WORM).maxNearby(16, 64).buildOnGround(Types.MOTION_BLOCKING_NO_LEAVES);
+		if (LIL_WORM_ENABLED && LIL_WORM != null) {
+			SpawnRuleBuilder.start(LIL_WORM).buildOnGround(Types.MOTION_BLOCKING_NO_LEAVES);
 		}
 		spawnRulesRegistered = true;
 	}

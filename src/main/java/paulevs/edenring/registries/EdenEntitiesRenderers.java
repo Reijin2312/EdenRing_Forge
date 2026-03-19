@@ -23,13 +23,21 @@ public class EdenEntitiesRenderers {
 	public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(EdenEntities.LIGHTNING_RAY, LightningRayRenderer::new);
 		event.registerEntityRenderer(EdenEntities.LIMPHIUM_PAINTING, EdenPaintingRenderer::new);
-		event.registerEntityRenderer(EdenEntities.DISKWING, DiskwingEntityRenderer::new);
-		event.registerEntityRenderer(EdenEntities.LIL_WORM, LilWormEntityRenderer::new);
+		if (EdenEntities.DISKWING != null) {
+			event.registerEntityRenderer(EdenEntities.DISKWING, DiskwingEntityRenderer::new);
+		}
+		if (EdenEntities.LIL_WORM != null) {
+			event.registerEntityRenderer(EdenEntities.LIL_WORM, LilWormEntityRenderer::new);
+		}
 	}
 
 	public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(DISKWING_MODEL, DiskwingEntityModel::getTexturedModelData);
-		event.registerLayerDefinition(LIL_WORM_MODEL, LilWormEntityModel::getTexturedModelData);
+		if (EdenEntities.DISKWING != null) {
+			event.registerLayerDefinition(DISKWING_MODEL, DiskwingEntityModel::getTexturedModelData);
+		}
+		if (EdenEntities.LIL_WORM != null) {
+			event.registerLayerDefinition(LIL_WORM_MODEL, LilWormEntityModel::getTexturedModelData);
+		}
 	}
 	
 	private static ModelLayerLocation registerMain(String id) {

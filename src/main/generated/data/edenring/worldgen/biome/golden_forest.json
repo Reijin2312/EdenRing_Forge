@@ -43,6 +43,7 @@
       "edenring:ore_coal",
       "edenring:ore_iron",
       "edenring:ore_copper",
+      "edenring:ore_astrallium",
       "edenring:ore_gold"
     ],
     [],
@@ -60,16 +61,16 @@
   "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
-    "ambient": [
+    "ambient": [],
+    "axolotls": [],
+    "creature": [
       {
         "type": "edenring:lil_worm",
-        "maxCount": 5,
-        "minCount": 2,
-        "weight": 30
+        "maxCount": 7,
+        "minCount": 3,
+        "weight": 160
       }
     ],
-    "axolotls": [],
-    "creature": [],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],

@@ -41,7 +41,8 @@
       "edenring:ore_cobble",
       "edenring:ore_coal",
       "edenring:ore_iron",
-      "edenring:ore_copper"
+      "edenring:ore_copper",
+      "edenring:ore_astrallium"
     ]
   ],
   "has_precipitation": false,

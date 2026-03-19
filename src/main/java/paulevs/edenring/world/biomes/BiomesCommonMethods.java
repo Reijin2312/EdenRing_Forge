@@ -23,6 +23,7 @@ public class BiomesCommonMethods {
 			.feature(EdenFeatures.ORE_COAL)
 			.feature(EdenFeatures.ORE_IRON)
 			.feature(EdenFeatures.ORE_COPPER)
+			.feature(EdenFeatures.ORE_ASTRALLIUM)
 			.feature(EdenFeatures.GRAVILITE_CRYSTAL);
 	}
 

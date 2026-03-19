@@ -16,12 +16,14 @@ public class GoldenForestBiome extends EdenRingBiome.Config {
         super(EdenBiomes.GOLDEN_FOREST.location());
     }
 
-    @Override
+	@Override
     protected void addCustomBuildData(BCLBiomeBuilder builder) {
-        BiomesCommonMethods.addDefaultLandFeatures(builder);
-        builder
-                .spawn(EdenEntities.LIL_WORM, 30, 2, 5)
-                .fogDensity(1F)
+		BiomesCommonMethods.addDefaultLandFeatures(builder);
+		if (EdenEntities.LIL_WORM != null) {
+			builder.spawn(EdenEntities.LIL_WORM, 160, 3, 7);
+		}
+		builder
+				.fogDensity(1F)
                 .plantsColor(255, 174, 100)
                 .skyColor(113, 178, 255)
                 .fogColor(183, 212, 255)

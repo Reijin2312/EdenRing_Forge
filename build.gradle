@@ -188,3 +188,19 @@ configurations {
 artifacts {
     dev jar
 }
+
+def modrinthModsDir = new File("C:/Users/Redmi/AppData/Roaming/ModrinthApp/profiles/1.20.1 (1)/mods")
+def edenRingReobfJar = layout.buildDirectory.file("reobfJar/output.jar")
+
+tasks.register("copyModrinthJar", Copy) {
+    dependsOn(tasks.named("reobfJar"))
+    onlyIf { modrinthModsDir.parentFile.exists() }
+    from(edenRingReobfJar) {
+        rename { tasks.named("jar").get().archiveFileName.get() }
+    }
+    into(modrinthModsDir)
+}
+
+tasks.named("build") {
+    finalizedBy(tasks.named("copyModrinthJar"))
+}
