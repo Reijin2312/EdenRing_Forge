@@ -70,14 +70,19 @@ mixin {
     config "edenring.mixins.client.json"
 }
 
-def mixinRefmapFile = layout.buildDirectory.file("tmp/compileJava/${project.mod_id}.refmap.json")
+def mixinRefmapFile = layout.buildDirectory.file("tmp/compileJava/compileJava-refmap.json")
 tasks.register("syncMixinRefmap", Copy) {
     dependsOn(tasks.named("compileJava"))
     from(mixinRefmapFile)
+    rename { "${project.mod_id}.refmap.json" }
     into(layout.buildDirectory.dir("resources/main"))
 }
 
 tasks.matching { it.name == "prepareRuns" || it.name.startsWith("prepareRun") }.configureEach {
+    dependsOn(tasks.named("syncMixinRefmap"))
+}
+
+tasks.named("jar") {
     dependsOn(tasks.named("syncMixinRefmap"))
 }
 
@@ -146,6 +151,11 @@ tasks.withType(JavaCompile).configureEach {
     options.release = 17
 }
 
+tasks.named("compileJava", JavaCompile).configure {
+    // Ensure incremental builds rerun compilation if mixin refmap output is missing.
+    outputs.file(layout.buildDirectory.file("tmp/compileJava/compileJava-refmap.json"))
+}
+
 javadoc {
     options.tags = ["reason"]
     options.stylesheetFile = new File(projectDir, "javadoc.css")
@@ -189,18 +199,71 @@ artifacts {
     dev jar
 }
 
+def distDir = new File(rootProject.projectDir.parentFile, "betterx-dist")
 def modrinthModsDir = new File("C:/Users/Redmi/AppData/Roaming/ModrinthApp/profiles/1.20.1 (1)/mods")
 def edenRingReobfJar = layout.buildDirectory.file("reobfJar/output.jar")
+def bclibReobfJar = local_bclib ? project(":BCLib").layout.buildDirectory.file("reobfJar/output.jar") : null
+def wunderlibReobfJar = local_wunderlib ? project(":WunderLib").layout.buildDirectory.file("reobfJar/output.jar") : null
+def bundledLibraryJars = providers.provider {
+    configurations.runtimeClasspath.resolvedConfiguration.resolvedArtifacts.findAll { artifact ->
+        (artifact.moduleVersion.id.group == "org.betterx" && artifact.name == "bclib") ||
+                (artifact.moduleVersion.id.group == "de.ambertation" && artifact.name == "wunderlib")
+    }.collect { it.file }
+}
 
-tasks.register("copyModrinthJar", Copy) {
+tasks.register("copyDistJars", Copy) {
     dependsOn(tasks.named("reobfJar"))
-    onlyIf { modrinthModsDir.parentFile.exists() }
     from(edenRingReobfJar) {
         rename { tasks.named("jar").get().archiveFileName.get() }
     }
+
+    if (local_bclib) {
+        dependsOn(project(":BCLib").tasks.named("reobfJar"))
+        from(bclibReobfJar) {
+            rename { project(":BCLib").tasks.named("jar").get().archiveFileName.get() }
+        }
+    }
+    if (local_wunderlib) {
+        dependsOn(project(":WunderLib").tasks.named("reobfJar"))
+        from(wunderlibReobfJar) {
+            rename { project(":WunderLib").tasks.named("jar").get().archiveFileName.get() }
+        }
+    }
+    if (!local_bclib || !local_wunderlib) {
+        from(bundledLibraryJars)
+    }
+
+    into(distDir)
+}
+
+tasks.register("copyModrinthJars", Copy) {
+    dependsOn(tasks.named("reobfJar"))
+    onlyIf { modrinthModsDir.parentFile.exists() }
+
+    from(edenRingReobfJar) {
+        rename { tasks.named("jar").get().archiveFileName.get() }
+    }
+
+    if (local_bclib) {
+        dependsOn(project(":BCLib").tasks.named("reobfJar"))
+        from(bclibReobfJar) {
+            rename { project(":BCLib").tasks.named("jar").get().archiveFileName.get() }
+        }
+    }
+    if (local_wunderlib) {
+        dependsOn(project(":WunderLib").tasks.named("reobfJar"))
+        from(wunderlibReobfJar) {
+            rename { project(":WunderLib").tasks.named("jar").get().archiveFileName.get() }
+        }
+    }
+    if (!local_bclib || !local_wunderlib) {
+        from(bundledLibraryJars)
+    }
+
     into(modrinthModsDir)
 }
 
 tasks.named("build") {
-    finalizedBy(tasks.named("copyModrinthJar"))
+    finalizedBy(tasks.named("copyDistJars"))
+    finalizedBy(tasks.named("copyModrinthJars"))
 }

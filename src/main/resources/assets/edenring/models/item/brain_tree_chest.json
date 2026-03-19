@@ -1,3 +1,6 @@
-﻿{
-    "parent":  "edenring:block/brain_tree_chest"
+{
+  "parent": "bclib:block/chest_item",
+  "textures": {
+    "texture": "edenring:block/chest/brain_tree_chest"
+  }
 }

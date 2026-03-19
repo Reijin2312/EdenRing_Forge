@@ -1,7 +1,3 @@
 ﻿{
-    "parent":  "minecraft:item/generated",
-    "textures":  {
-                     "layer0": "edenring:item/pulse_tree"
-                 }
+    "parent": "edenring:block/pulse_tree_up"
 }
-

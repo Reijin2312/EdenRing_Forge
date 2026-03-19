@@ -1,3 +1,6 @@
-﻿{
-    "parent":  "edenring:block/auritis_chest"
+{
+  "parent": "bclib:block/chest_item",
+  "textures": {
+    "texture": "edenring:block/chest/auritis_chest"
+  }
 }

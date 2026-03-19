@@ -95,10 +95,6 @@ public void onInitialize() {
           updated = true;
         }
 
-        if (!generator.contains("seed", Tag.TAG_LONG)) {
-          generator.putLong("seed", worldGenSettings.getLong("seed"));
-          updated = true;
-        }
         if (!"minecraft:noise".equals(generator.getString("type"))) {
           generator.putString("type", "minecraft:noise");
           updated = true;
@@ -132,7 +128,7 @@ public static void registerCreativeTabs() {
           item -> BaseRegistry.getModBlockItems(MOD_ID).contains(item)
               || BaseRegistry.getModItems(MOD_ID).contains(item)
       )
-      .setIcon(EdenBlocks.VOLVOX_BLOCK)
+      .setIcon(EdenBlocks.GRAVILITE_SHARDS)
       .build()
       .processBCLRegistry()
       .register();

@@ -1,3 +1,6 @@
-﻿{
-    "parent":  "edenring:block/auritis_sign"
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "edenring:item/auritis_sign"
+  }
 }

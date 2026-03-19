@@ -39,7 +39,7 @@ public class LilWormEntity extends PathfinderMob {
 
 	public static AttributeSupplier.Builder createMobAttributes() {
 		return Mob.createMobAttributes()
-			.add(Attributes.MAX_HEALTH, 4.0D)
+			.add(Attributes.MAX_HEALTH, 2.0D)
 			.add(Attributes.MOVEMENT_SPEED, 0.24D)
 			.add(Attributes.FOLLOW_RANGE, 8.0D);
 	}

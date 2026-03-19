@@ -1,3 +1,6 @@
-﻿{
-    "parent":  "edenring:block/pulse_tree_sign"
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "edenring:item/pulse_tree_sign"
+  }
 }
