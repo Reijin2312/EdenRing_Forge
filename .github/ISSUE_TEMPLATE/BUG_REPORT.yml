@@ -1,0 +1,89 @@
+name: Report a Bug (Forge)
+description: File a bug report
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a Bug in EdenRing (Forge)!
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Versions
+
+  - type: input
+    id: edenring_version
+    attributes:
+      label: EdenRing (Forge)
+      description: What version of EdenRing are you running?
+      placeholder: 20.0.x
+    validations:
+      required: true
+
+  - type: input
+    id: bclib_version
+    attributes:
+      label: BCLib
+      description: What version of BCLib are you running?
+      placeholder: 20.0.x
+    validations:
+      required: true
+
+  - type: input
+    id: wunderlib_version
+    attributes:
+      label: WunderLib
+      description: What version of WunderLib are you running?
+      placeholder: 20.0.x
+    validations:
+      required: true
+
+  - type: input
+    id: forge_version
+    attributes:
+      label: Forge
+      description: What version of Forge are you using?
+      placeholder: 47.x.x
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mc_version
+    attributes:
+      label: Minecraft
+      description: What version of Minecraft is installed?
+      options:
+        - "1.20.1"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Additional Information
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+
+  - type: textarea
+    id: other_mods
+    attributes:
+      label: Other Mods
+      description: If you can, please supply a list of installed Mods (besides EdenRing, BCLib, and WunderLib). This information may already be included in the log above.
+      render: shell
